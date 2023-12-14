@@ -1,0 +1,8 @@
+<?php
+include'conn1.php'
+$s="create table aakash(  id int primary key,name varchar(90),place varchar(30),girlfrind varchar(30))"
+if($conn1->query($s))
+echo"table craetion succefull";
+else
+ echo"connetion error".$conn->error;
+ ?>

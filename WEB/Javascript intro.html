@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<title>Javascript intro</title>
+		<script type="text/javascript">
+			function show(){
+			var n=document.getElementById("name").value;
+			var a=document.getElementById("age").value;
+			document.write("Name="+n+"<br>Age="+a);
+			}
+		function cancel(){
+			document.getElementById("form1").reset();
+			}
+		</script>
+	</head>
+	<body>
+	<form id="form1">
+		<table border="2" align="center">
+			<brr><br><h3 align="center">Enter Your Details</h3>
+			<tr><th>Enter Your Name:</th><td><input type="text" id="name" ></td></tr>
+			<tr><th>Age:</th><td><input type="text" id="age" ></td></tr>
+			<tr><th colspan="2"><input type="button" value="Show" Onclick="show()">
+			     <input type="button"  value="Cancel" Onclick="cancel()"></th></tr>
+	 	</table>
+	 </form>
+	</body>
+</html>
+			     
+	

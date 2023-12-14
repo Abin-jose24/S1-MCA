@@ -1,0 +1,67 @@
+<?php
+include 'conn.php';
+if(isset($_POST['sub']))
+{
+$name=$_POST['name'];
+$date=$_POST['date'];
+$email=$_POST['email'];
+$addrs=$_POST['address'];
+$sql="insert into Student(stud_name,stud_dob,stud_email,stud_address)Values('$name','$date','$email','$addrs')";
+if(mysqli_query($conn,$sql)
+{
+   <script>
+     alert(" Data Inserted");
+     window.location="forminsertion.php";
+    </script>
+    }
+ else
+ {
+   <script>
+     alert("Insertion failed");
+     window.location="forminsertion.php";
+    </script>
+    }
+    ?>
+ <html>
+ 	<head>
+ 	</head>
+   <body>
+   <form name="f1" method="post">
+   <table border="1" align="center">
+   <tr>
+   	<th>Name</th>
+   	<td><input type="text" name="name" required></td>
+   </tr>   
+   <tr>
+   	<th>Date Of Birth</th>
+   	<td><input type="date" name="date" required></td>
+   </tr> 
+   <tr>
+   	<th>Email</th>
+   	<td><input type="email" name="email" required></td>
+   </tr> 
+   <tr>
+   	<th>Address</th>
+   	<td><input type="text" name="address" required></td>
+   </tr>
+   <tr>
+   <td colspan="2" align="center"><input type="submit" name="sub" value="submit" > </td>
+   <td><input type="reset" value="cancel"></td>
+   </tr>
+   </table>
+   <br><br>
+   </form>
+   </body>
+   </html>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+$conn->close();
+?>
