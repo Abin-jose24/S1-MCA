@@ -1,78 +1,57 @@
-#include <stdio.h>
-int n, s, adj[10][10], queue[10];
-int visited[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-int front = -1, rear = -1, item;
-void enqueue(int item)
+#include<stdio.h>
+int visited[10]={0},queue[10],adj[10][10],newarray[10];
+int i,j,flag=0,n,v,front=0,rear=0,x=1;
+void bfs(int);
+void main()
 {
-    if (rear == 9)
-        printf("Queue if Full \n");
-    else
-    {
-        if (rear == -1)
-        {
-            front = rear = 0;
-            queue[rear] = item;
-        }
+	printf("BFS");
+	printf("\nEnter the no. of vertices:");
+	scanf("%d",&n);
+	printf("Enter the adjacency matrix:\n");
+	for(i=1;i<=n;i++)
+	    for(j=1;j<=n;j++)
+	        scanf("%d",&adj[i][j]);
+    printf("\nenter the starting vertex:");
+    scanf("%d",&v);
+    visited[v]=1;
+    rear++;
+    front++;
+    queue[rear]=v;
+    newarray[x]=v;
+    bfs(v);
+    printf("\nvisited array\n");
+    for(i=1;i<=n;i++)
+        if(visited[i]==1)
+           printf("%d ",i);
         else
         {
-            rear = rear + 1;
-            queue[rear] = item;
-        }
-    }
-}
-int dequeue()
+		flag=1;
+		   printf("no spanning tree");
+		   break;
+	   }
+if(flag==0)
 {
-    int k;
-    if ((front > rear) || (front == -1))
-        return (0);
-    else
-    {
-        k = queue[front];
-        front++;
-        return (k);
-    }
+	printf("\nNew array:\n");
+	for(i=1;i<=n;i++)
+	   printf("%d ",newarray[i]);
 }
-void bfs(int s, int n)
-{
-    int p;
-    enqueue(s);
-    visited[s] = 1;
-    p = dequeue();
-    if (p != 0)
-    {
-        printf("%d \t", p);
-    }
-    while (p != 0)
-    {
-        for (int i = 1; i <= n; i++)
-        {
-            if (adj[p][i] == 1 && visited[i] == 0)
-            {
-                enqueue(i);
-                visited[i] = 1;
-            }
-        }
-        p = dequeue();
-        if (p != 0)
-        {
-            printf("%d \t", p);
-        }
-    }
-}
-int main()
-{
-    printf("Enter the no of vertices : \n ");
-    scanf("%d", &n);
-    printf("Enter the adjacency matrix : \n ");
-    for (int i = 1; i <= n; i++)
-    {
-        for (int j = 1; j <= n; j++)
-        {
-            scanf("%d", &adj[i][j]);
-        }
-    }
-    printf("Enter the starting vertex : \n ");
-    scanf("%d", &s);
-    bfs(s, n);
-    return 0;
-}
+getch();
+ } 
+ void bfs(int v)
+ {
+ 	for(i=1;i<=n;i++)
+ 	{
+ 		if(adj[v][i]==1 && visited[i]==0)
+ 		{
+ 			visited[i]=1;
+ 			queue[++rear]=i;
+ 			newarray[++x]=queue[rear];
+		 }
+	 }
+	 if(front<=rear)
+	   {
+	   	front++;
+	   	bfs(queue[front]);
+	   }
+ 	
+ }

@@ -1,79 +1,47 @@
-#include <stdio.h>
-int n, s, adj[10][10], stack[10];
-int visited[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-int top = -1;
-int item;
-void push(int item)
+#include<stdio.h>
+int adj[10][10],visited[10],stack[10],i,j,n,v;
+void dfs();
+void main()
 {
-    if (top == 9)
-        printf("Stack if Full \n");
-    else
-    {
-        if (top == -1)
-        {
-            top = 0;
-            stack[top] = item;
-        }
-        else
-        {
-            top = top + 1;
-            stack[top] = item;
-        }
-    }
+	printf("DFS traversal");
+	printf("\nEnter no of vertices:");
+	scanf("%d",&n);
+	printf("\nEnter the adjacency matrix:\n");
+	for(i=1;i<=n;i++)
+	   for(j=1;j<=n;j++)
+	   scanf("%d",&adj[i][j]);
+	printf("\nEnter The starting vertex:");
+	scanf("%d",&v);
+	visited[v]=1;
+	stack[1]=v;
+	dfs();
+	getch();
 }
-int pop()
+void dfs()
 {
-    int k;
-    if (top == -1)
-        return (0);
-    else
-    {
-        k = stack[top];
-        top--;
-        return (k);
-    }
+	int top=1,popped[20],p=1,vertex;
+	while(top>=1)
+	{
+	vertex=stack[top];
+	int found=0;
+	for(i=1;i<=n;i++)
+		if(adj[vertex][i]==1 && visited[i]==0)
+		{
+			visited[i]=1;
+			found=1;
+			stack[++top]=i;
+			break;
+		}
+		
+	if(!found)
+	{
+		popped[p++]=stack[top];
+		top--;
+	}
+	
 }
-void dfs(int s, int n)
-{
-    int p;
-    push(s);
-    visited[s] = 1;
-    p = pop();
-    if (p != 0)
-    {
-        printf("%d \t", p);
-    }
-    while (p != 0)
-    {
-        for (int i = 1; i <= n; i++)
-        {
-            if (adj[p][i] == 1 && visited[i] == 0)
-            {
-                push(i);
-                visited[i] = 1;
-            }
-        }
-        p = pop();
-        if (p != 0)
-        {
-            printf("%d \t", p);
-        }
-    }
+printf("\ndfs traversal:");
+for(i=p-1;i>=1;i--)
+   printf("%d ",popped[i]);
 }
-int main()
-{
-    printf("Enter the no of vertices : \n ");
-    scanf("%d", &n);
-    printf("Enter the adjacency matrix : \n ");
-    for (int i = 1; i <= n; i++)
-    {
-        for (int j = 1; j <= n; j++)
-        {
-            scanf("%d", &adj[i][j]);
-        }
-    }
-    printf("Enter the starting vertex : \n ");
-    scanf("%d", &s);
-    dfs(s, n);
-    return 0;
-}
+ 
